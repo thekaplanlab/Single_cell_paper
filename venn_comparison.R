@@ -12,7 +12,7 @@ source("venn_function.R")
 source("commonUnique.R")
 
 #read csv file
-humangenes<-fread("Reyfman_Table1.csv", header=TRUE)
+humangenes<-fread("./data/Reyfman_Table1.csv", header=TRUE)
 
 #Venn for human data
 venn(humangenes, 14)
@@ -27,7 +27,7 @@ humanciliary<-gnameConverter(humanciliary, "human")
 
 
 # Read mouse data
-mouseciliarygenes<-read.csv("Du_et_2017_Mouse_scRNA_seq.csv", sep = ";", stringsAsFactors = FALSE)
+mouseciliarygenes<-read.csv("./data/Du_et_2017_Mouse_scRNA_seq.csv", sep = ";", stringsAsFactors = FALSE)
 mouseciliarygenes<-mouseciliarygenes[,seq(1,17,2)]
 
 
@@ -49,10 +49,10 @@ mouseciliary1<-data.frame(mouse = na.omit(mouseciliaryhuman$human), stringsAsFac
 
 
 # Read C. elegans data
-celegansciliary<-fread("C_elegans_single_cell_1329_.csv", header = FALSE)
+celegansciliary<-fread("./data/C_elegans_single_cell_1329_.csv", header = FALSE)
 
 # Read C. elegans homology data
-celeghum<-fread("C_elegans_Human_Homologs_20.01.2019 - UPDATED.csv")
+celeghum<-fread("./data/C_elegans_Human_Homologs_20.01.2019 - UPDATED.csv")
 
 
 # Convert from C. elegans to human gene name
@@ -92,7 +92,7 @@ commoninall<-commonUnique(allciliary, c("human", "mouse", "celegans"))
 
 # Combine all
 allciliarylast<-cbindX(onlyinhuman, onlyinmouse, onlyincelegans, mouseandhuman, humanandcelegans, mouseandcelegans, commoninall)
-write.table(allciliarylast, "allciliarylast1.csv", sep = ",", row.names = FALSE, quote = FALSE)
+#write.table(allciliarylast, "./data/allciliarylast1.csv", sep = ",", row.names = FALSE, quote = FALSE)
 
 
 # Venn
@@ -114,7 +114,7 @@ mouhum<-gnameConverter(mouhum, "Gene_name")
 
 # CiliaCarta
 
-ciliacarta<-fread("CiliaCarta_genes.csv", select = "Associated Gene Name")
+ciliacarta<-fread("./data/CiliaCarta_genes.csv", select = "Associated Gene Name")
 colnames(ciliacarta)[1]<-"cilia_carta"
 ciliacarta<-gnameConverter(ciliacarta, "cilia_carta")
 celeghum11<-celeghum[,6]
@@ -125,7 +125,7 @@ ciliacarta_mouse<-ciliacarta[which(ciliacarta$cilia_carta %in% mouhum$Gene_name)
 
 # Gold standard
 
-goldstandard<-fread("Gold_standard_cilia_scgs.v1.tsv", select = "V2")
+goldstandard<-fread("./data/Gold_standard_cilia_scgs.v1.tsv", select = "V2")
 goldstandard<-goldstandard[-1]
 colnames(goldstandard)<-"gold_standard"
 goldstandard<-gnameConverter(goldstandard, "gold_standard")
@@ -134,7 +134,7 @@ goldstandard_mouse<-goldstandard[which(goldstandard$gold_standard %in% mouhum$Ge
 
 # Negative cilia genes
 
-negativecilia<-read_xls("Nevers_2017_NegativeGenesInsightsCiiaryGenes_SuppTable3 .xls") %>%
+negativecilia<-read_xls("./data/Nevers_2017_NegativeGenesInsightsCiiaryGenes_SuppTable3 .xls") %>%
   select("Gene Name")
 negativecilia<-data.table(negativecilia)
 colnames(negativecilia)<-"negative_ciliary"
