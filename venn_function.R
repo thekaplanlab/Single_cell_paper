@@ -6,6 +6,7 @@ venn = function(genes, numofcol) {
   
   unallgenes= unique(allgenes, incomparables = FALSE, MARGIN = 1,
                      fromLast = FALSE)    #Unique gene list
+  unallgenes = unallgenes[-which(unallgenes == "")]
   munallgenes = as.matrix(unallgenes)     
   
   boo = matrix(nrow = length(munallgenes), ncol = numofcol)    #empty matrix
