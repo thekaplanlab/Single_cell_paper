@@ -8,8 +8,8 @@ library(UpSetR)
 library(data.table)
 library(dplyr)
 library(readxl)
-source("venn_function.R")
-source("commonUnique.R")
+source("./functions/venn_function.R")
+source("./functions/commonUnique.R")
 
 #read csv file
 humangenes<-fread("./data/Reyfman_Table1.csv", header=TRUE)
