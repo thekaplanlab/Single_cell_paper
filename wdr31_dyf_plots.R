@@ -46,11 +46,11 @@ dyf_last$Genotype<-factor(dyf_last$Genotype, levels = c(dyf1$Genotype))
 
 
 xsub0 <- ~ atop(paste(italic("wdr-31"),"(tm10423);",italic("elmod-3")))
-xsub1 <- ~ atop(paste(italic("wdr-31"),"(tm10423)"), paste(italic("elmod-3"), ";Ex[ELMD-1(+)]"))
-xsub2 <- ~ atop(paste(italic("elmd-1"),"(syb630)"), paste(italic("rpi-2"),";(ok1863)"))
-xsub3 <- ~ atop(paste(italic("wdr-31"),"(tm10423)"), paste(italic("elmd-1; rpi-2")))
-xsub4 <- ~ atop(paste(italic("wdr-31"),"(tm10423);",italic("elmd-1")), paste(italic("rpi-2"),";Ex[ELMD-1(+)]"))
-xsub5 <- ~ atop(paste(italic("wdr-31"),"(syb1568)"), paste(italic("elmd-1; rpi-2"),";(ok1863)"))
+xsub1 <- ~ atop(paste(italic("wdr-31"),"(tm10423); "), paste(italic("elmod-3"), ";Ex[ELMD-1(+)]"))
+xsub2 <- ~ atop(paste(italic("elmd-1"),"(syb630); "), paste(italic("rpi-2"),";(ok1863)"))
+xsub3 <- ~ atop(paste(italic("wdr-31"),"(tm10423); "), paste(italic("elmd-1; rpi-2")))
+xsub4 <- ~ atop(paste(italic("wdr-31"),"(tm10423); ",italic("elmd-1")), paste(italic("rpi-2"),";Ex[ELMD-1(+)]"))
+xsub5 <- ~ atop(paste(italic("wdr-31"),"(syb1568); "), paste(italic("elmd-1; rpi-2"),";(ok1863)"))
 xsub6 <- ~ atop(paste(italic("wdr-31"),"(syb1568);",italic("elmd-1")), paste(italic("rpi-2"),";Ex[WDR-31(+)]"))
 xsub3 <- expression(paste(italic("wdr-31"),";syb1568"))
 
