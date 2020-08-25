@@ -38,33 +38,91 @@ awb_data<-function(data){
 }
 
 awb<-read_xlsx("./data/AWB_Cilia_Morphology_Analysis.xlsx")
-#awb_2<-read_xlsx("./data/AWB_Cilia_Morphology_Analysis.xlsx",2)
-#awb_3<-read_xlsx("./data/AWB_Cilia_Morphology_Analysis.xlsx",3)
-#awb_4<-read_xlsx("./data/AWB_Cilia_Morphology_Analysis.xlsx",4)
+awb_2<-read_xlsx("./data/AWB_Cilia_Morphology_Analysis.xlsx",2)
+awb_3<-read_xlsx("./data/AWB_Cilia_Morphology_Analysis.xlsx",3)
+awb_4<-read_xlsx("./data/AWB_Cilia_Morphology_Analysis.xlsx",4)
 
-#awb_2t<-awb_data(awb_2)
+awb_4<-awb_4[,1:5]
+
 awb<-awb_data(awb)
-
-# Plot for first table
-
-xsub0 <- ~ atop(paste(italic("wdr-31"),"(tm10423);",italic("elmod-3")))
-xsub1 <- ~ atop(paste(italic("wdr-31"),"(tm10423); "), paste(italic("elmod-3"), ";Ex[ELMD-1(+)]"))
-xsub2 <- ~ atop(paste(italic("elmd-1"),"(syb630); "), paste(italic("rpi-2"),";(ok1863)"))
-xsub3 <- ~ atop(paste(italic("wdr-31"),"(tm10423); "), paste(italic("rpi-2")))
-xsub4 <- ~ atop(paste(italic("wdr-31"),"(tm10423); "), paste(italic("elmd-1; rpi-2")))
-xsub5 <- ~ atop(paste(italic("wdr-31"),"(syb1568); "), paste(italic("elmd-1; rpi-2"),";(ok1863)"))
+awb_2<-awb_data(awb_2)
+awb_3<-awb_data(awb_3)
+awb_4<-awb_data(awb_4)
 
 
-ggplot(data = awb_last, aes(x = Genotype, y = Count_p, fill = Phenotype)) +
+# Plot for table 1
+
+xsub_plot1 <- ~ atop(paste(italic("wdr-31"),"(tm10423);",italic("elmod-3")))
+xsub1_plot1 <- ~ atop(paste(italic("wdr-31"),"(tm10423); "), paste(italic("elmod-3"), ";Ex[ELMD-1(+)]"))
+xsub2_plot1 <- ~ atop(paste(italic("elmd-1"),"(syb630); "), paste(italic("rpi-2"),";(ok1863)"))
+xsub3_plot1 <- ~ atop(paste(italic("wdr-31"),"(tm10423); "), paste(italic("rpi-2")))
+xsub4_plot1 <- ~ atop(paste(italic("wdr-31"),"(tm10423); "), paste(italic("elmd-1; rpi-2")))
+xsub5_plot1 <- ~ atop(paste(italic("wdr-31"),"(syb1568); "), paste(italic("elmd-1; rpi-2"),";(ok1863)"))
+
+
+awb_plot1<-ggplot(data = awb, aes(x = Genotype, y = Count_p, fill = Phenotype)) +
   geom_bar(stat = "identity", width = 0.9, color = "black") +
   scale_x_discrete("Genotype", labels = c(expression("Wild Type", 
                                                      paste(italic("wdr-31"),"(tm10423)"),
                                                      italic("wdr-31")(syb1568),
                                                      italic("elmd-1"),
                                                      italic("rpi-2")),
-                                                     xsub0,xsub1,xsub2,xsub3,xsub4,xsub5
+                                                     xsub_plot1,xsub1_plot1,xsub2_plot1,xsub3_plot1,xsub4_plot1,xsub5_plot1
   )) +
   scale_y_continuous("Count (%)") +
   theme(legend.text.align = 0, panel.background = element_rect(fill = "white"),
         axis.line = element_line(colour = "black"), text = element_text(size=12))
+
+
+
+# Plot for table 2
+
+awb_plot2<-ggplot(data = awb_2, aes(x = Genotype, y = Count_p, fill = Phenotype)) +
+  geom_bar(stat = "identity", width = 0.9, color = "black") +
+  scale_x_discrete("Genotype", labels = expression("Wild Type", 
+                                                     paste(italic("wdr-31"),"(261-378del)"),
+                                                     paste(italic("wdr-31"),"(261-378del); ", italic("elmd-1; rpi-2")),
+                                                     paste(italic("wdr-31"),"(2-138del); ", italic("elmd-1; rpi-2")),
+                                                     paste(italic("wdr-31"),"(139-261del); ", italic("elmd-1; rpi-2")),
+  )) +
+  scale_y_continuous("Count (%)") +
+  theme(legend.text.align = 0, panel.background = element_rect(fill = "white"),
+        axis.line = element_line(colour = "black"), text = element_text(size=12))
+
+
+# Plot for table 3
+
+xsub_plot3 <- ~ atop(paste(italic("wdr-31"),"(tm10423); "), paste(italic("elmd-1; rpi-2; ankr-26")))
+awb_plot3<-ggplot(data = awb_3, aes(x = Genotype, y = Count_p, fill = Phenotype)) +
+  geom_bar(stat = "identity", width = 0.9, color = "black") +
+  scale_x_discrete("Genotype", labels = c(expression("Wild Type", 
+                                                     italic("ankr-26")),
+                                          xsub_plot3
+  )) +
+  scale_y_continuous("Count (%)") +
+  theme(legend.text.align = 0, panel.background = element_rect(fill = "white"),
+        axis.line = element_line(colour = "black"), text = element_text(size=12))
+
+
+# Plot for table 4
+
+xsub_plot4 <- ~ atop(paste(italic("wdr-31"),"(syb1568); ",italic("rpi-2"), ";"), "Ex[WDR-31(+)]")
+awb_plot4<-ggplot(data = awb_4, aes(x = Genotype, y = Count_p, fill = Phenotype)) +
+  geom_bar(stat = "identity", width = 0.9, color = "black") +
+  scale_x_discrete("Genotype", labels = c(expression( 
+                                                     paste(italic("wdr-31"),"(syb1568)"),
+                                                     italic("rpi-2"),
+                                                     paste(italic("wdr-31"),"(syb1568); ", italic("rpi-2"))),
+                                          xsub_plot4
+  )) +
+  scale_y_continuous("Count (%)") +
+  theme(legend.text.align = 0, panel.background = element_rect(fill = "white"),
+        axis.line = element_line(colour = "black"), text = element_text(size=12))
+
+# Draw all plots
+
+awb_plot1
+awb_plot2
+awb_plot3
+awb_plot4
 
