@@ -82,18 +82,11 @@ allciliary$celegans<-replace(allciliary$celegans, is.na(allciliary$celegans), ""
 
 
 # Find genes found only in "......"
-onlyincelegans<-commonUnique(allciliary, "celegans")
-onlyinhuman<-commonUnique(allciliary, "human")
-onlyinmouse<-commonUnique(allciliary, "mouse")
-mouseandhuman<-commonUnique(allciliary, c("human","mouse"))
-humanandcelegans<-commonUnique(allciliary, c("human", "celegans"))
-mouseandcelegans<-commonUnique(allciliary, c("mouse", "celegans"))
-commoninall<-commonUnique(allciliary, c("human", "mouse", "celegans"))
 
-# Combine all
-allciliarylast<-cbindX(onlyinhuman, onlyinmouse, onlyincelegans, mouseandhuman, humanandcelegans, mouseandcelegans, commoninall)
-#write.table(allciliarylast, "./data/allciliarylast1.csv", sep = ",", row.names = FALSE, quote = FALSE)
+human_mouse_celegans<-commonUnique(allciliary)
+human_mouse_celegans<-replace(human_mouse_celegans, is.na(human_mouse_celegans), "")
 
+write.table(human_mouse_celegans, "./data/human_mouse_celegans.csv", sep = ",", row.names = FALSE, quote = FALSE)
 
 # Venn
 
@@ -135,7 +128,7 @@ goldstandard_mouse<-goldstandard[which(goldstandard$gold_standard %in% mouhum$Ge
 # Negative cilia genes
 
 negativecilia<-read_xls("./data/Nevers_2017_NegativeGenesInsightsCiiaryGenes_SuppTable3 .xls") %>%
-  select("Gene Name")
+  dplyr::select("Gene Name")
 negativecilia<-data.table(negativecilia)
 colnames(negativecilia)<-"negative_ciliary"
 negativecilia<-gnameConverter(negativecilia, "negative_ciliary")
@@ -186,4 +179,27 @@ all4$mouse<-replace(all4$mouse, is.na(all4$mouse), "")
 all4$human<-replace(all4$human, is.na(all4$human), "")
 
 venn(all4, 6)
+
+
+# Gene lists
+
+human<-commonUnique(all1)
+human<-replace(human, is.na(human), "")
+
+write.table(human, "./data/human.csv", sep = ",", row.names = FALSE, quote = FALSE)
+
+mouse<-commonUnique(all2)
+mouse<-replace(mouse, is.na(mouse), "")
+
+write.table(mouse, "./data/mouse.csv", sep = ",", row.names = FALSE, quote = FALSE)
+
+celegans<-commonUnique(all3)
+celegans<-replace(celegans, is.na(celegans), "")
+
+write.table(celegans, "./data/celegans.csv", sep = ",", row.names = FALSE, quote = FALSE)
+
+all<-commonUnique(all4)
+all<-replace(all, is.na(all), "")
+
+write.table(all, "./data/all.csv", sep = ",", row.names = FALSE, quote = FALSE)
 
