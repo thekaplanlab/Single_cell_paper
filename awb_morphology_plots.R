@@ -52,7 +52,7 @@ awb_4<-awb_data(awb_4)
 
 # Plot for table 1
 
-xsub_plot1 <- ~ atop(paste(italic("wdr-31"),"(tm10423);",italic("elmod-3")))
+xsub_plot1 <- ~ atop(paste(italic("wdr-31"),"(tm10423); "), paste(italic("elmod-3")))
 xsub1_plot1 <- ~ atop(paste(italic("wdr-31"),"(tm10423); "), paste(italic("elmod-3"), ";Ex[ELMD-1(+)]"))
 xsub2_plot1 <- ~ atop(paste(italic("elmd-1"),"(syb630); "), paste(italic("rpi-2"),";(ok1863)"))
 xsub3_plot1 <- ~ atop(paste(italic("wdr-31"),"(tm10423); "), paste(italic("rpi-2")))
@@ -71,7 +71,7 @@ awb_plot1<-ggplot(data = awb, aes(x = Genotype, y = Count_p, fill = Phenotype)) 
   )) +
   scale_y_continuous("Count (%)") +
   theme(legend.text.align = 0, panel.background = element_rect(fill = "white"),
-        axis.line = element_line(colour = "black"), text = element_text(size=12))
+        axis.line = element_line(colour = "black"), text = element_text(size=15))
 
 
 
