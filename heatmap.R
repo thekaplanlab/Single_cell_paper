@@ -35,7 +35,7 @@ ann_color<-list(
   `Gene type` = c(`Known ciliary genes` = "#FF8C00", `Putative ciliary genes` = "#00BFFF")
 )
 
-pheatmap(mm, cluster_cols = FALSE, cluster_rows = FALSE, show_rownames = TRUE, fontsize_row = 7, scale = "row", angle_col = 315, gaps_row = 52, 
+pheatmap(mm, cluster_cols = FALSE, cluster_rows = FALSE, show_rownames = TRUE, fontsize_row = 7, scale = "row", angle_col = 315, gaps_row = 51, 
          annotation_row = annot1, annotation_names_row = FALSE,
          annotation_col = annotcol, annotation_names_col = FALSE,
          annotation_colors = ann_color)
